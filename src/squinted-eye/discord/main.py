@@ -40,6 +40,19 @@ def check_target_account(token: str, target_user_id: str) -> bool:
         return False
 
 
-async def discord_monitor(token: str):
+async def change_detector(fetch_function, )
+
+async def discord_monitor(token: str, user_id: str):
     logger.info("Starting Discord monitor...")
+    if not check_discord_token(token):
+        logger.error("Invalid Discord token. Exiting Discord monitor.")
+        return
+    else:
+        logger.debug("Discord token is valid. Proceeding.")
+    
+    if not check_target_account(token, user_id):
+        logger.error(f"Invalid target account ID: {user_id}. Exiting Discord monitor.")
+        return
+    else:
+        logger.debug(f"Target account ID {user_id} is valid. Proceeding.")
     
