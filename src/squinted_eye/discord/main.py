@@ -51,7 +51,7 @@ def fetch_target_info(token: str, target_user_id: str) -> bool | dict[str, Any]:
 
     try:
         response = requests.get(url, headers=headers)
-        if not response.status_code == 200:
+        if response.status_code != 200:
             logger.error(f"Failed to fetch target account info. Status code: {response.status_code}")
             return False
         return response.json()
@@ -59,12 +59,7 @@ def fetch_target_info(token: str, target_user_id: str) -> bool | dict[str, Any]:
         logger.error(f"Error while checking target account: {e}")
         return False
 
-async def change_detector(
-    fetch_function,
-    token: str,
-    target_user_id: str,
-    interval: int,
-):
+async def change_detector(fetch_function, token: str, target_user_id: str, interval: int):
     """Repeatedly fetch target account information and return detected changes."""
 
     previous_info = None
