@@ -1,5 +1,5 @@
 [project]
-name = "squinting-eye"
+name = "squinted-eye"
 version = "0.1.0"
 description = "The OSINT tool for real time information and target monitoring"
 readme = "README.md"
