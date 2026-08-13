@@ -30,6 +30,7 @@ def check_target_account(token: str, target_user_id: str) -> bool:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             logger.info(f"Target account {target_user_id} is valid")
+            logger.debug(f"Response JSON: {response.json()}")
             return True
         else:
             logger.error(f"Invalid target account. Status code: {response.status_code}")
