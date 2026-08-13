@@ -2,7 +2,7 @@ import logging
 import sys
 
 
-class Logger:
+class logger:
     """Thin wrapper around Python's built in logger"""
     """At some point in the future, we'll use this to send webhooks."""
 
