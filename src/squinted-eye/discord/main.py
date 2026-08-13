@@ -1,4 +1,4 @@
-from src.lib.logger import logger
+from lib.logger import logger
 import requests
 logger = logger(name="discord_monitor")
 
