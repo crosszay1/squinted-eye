@@ -2,8 +2,10 @@ import asyncio
 from typing import Any, AsyncGenerator
 import httpx
 from lib.logger import logger
+from squinted_eye.lib.result_logger import result_logger
 
 logger = logger(name="discord_monitor")
+result_logger = result_logger(name="discord_monitor_results")
 
 async def check_discord_token(token: str) -> bool:
     """Check if the provided account token (that we will be using to monitor) is valid."""
@@ -153,6 +155,5 @@ async def discord_monitor(token: str, user_id: str, interval: int = 60):
 
     # Actually execute the monitor loop
     async for changes in change_detector(token, user_id, interval):
-        # Handle the detected changes here (e.g. send webhook, alert, save to DB, etc.)
-        
+        result_logger.hit(f"Detected changes in target account {user_id}: {changes}")
         pass

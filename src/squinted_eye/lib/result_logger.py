@@ -3,7 +3,7 @@ import logging
 from logger import logger
 
 
-class result_hit:
+class result_logger:
     """Function we call when we find a result."""
 
     def __init__(self, name: str = "app", level: int = logging.INFO):
