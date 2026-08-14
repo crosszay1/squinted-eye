@@ -96,17 +96,39 @@ async def change_detector(token: str, target_user_id: str, interval: int) -> Asy
                     changes.update(find_changes(old[key], new[key], current_path))
 
         elif isinstance(old, list) and isinstance(new, list):
-            max_length = max(len(old), len(new))
+            # 1. Handle lists of Discord objects (like mutual_guilds)
+            if (all(isinstance(x, dict) and 'id' in x for x in old) and 
+                all(isinstance(x, dict) and 'id' in x for x in new)):
+                
+                # Transform lists into dictionaries keyed by their 'id'
+                old_mapped = {x['id']: x for x in old}
+                new_mapped = {x['id']: x for x in new}
+                
+                # Recursively pass back to the dictionary comparison logic above
+                changes.update(find_changes(old_mapped, new_mapped, path))
+            
+            else:
+                # 2. Handle simple lists (e.g., lists of strings or integers)
+                try:
+                    # Sort them first so order doesn't trigger false positives
+                    old_list = sorted(old)
+                    new_list = sorted(new)
+                except TypeError:
+                    # Fallback for un-sortable mixed types
+                    old_list = old
+                    new_list = new
 
-            for i in range(max_length):
-                current_path = f"{path}[{i}]"
+                max_length = max(len(old_list), len(new_list))
 
-                if i >= len(old):
-                    changes[current_path] = {"old": None, "new": new[i]}
-                elif i >= len(new):
-                    changes[current_path] = {"old": old[i], "new": None}
-                else:
-                    changes.update(find_changes(old[i], new[i], current_path))
+                for i in range(max_length):
+                    current_path = f"{path}[{i}]"
+
+                    if i >= len(old_list):
+                        changes[current_path] = {"old": None, "new": new_list[i]}
+                    elif i >= len(new_list):
+                        changes[current_path] = {"old": old_list[i], "new": None}
+                    else:
+                        changes.update(find_changes(old_list[i], new_list[i], current_path))
 
         elif old != new:
             changes[path] = {"old": old, "new": new}
