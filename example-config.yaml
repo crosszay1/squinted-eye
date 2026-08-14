@@ -1,0 +1,8 @@
+# This is an example configuration file.
+
+enabled_monitors:
+  - discord_monitor
+
+settings:
+  discord_monitor:
+    token: "TOKEN"
