@@ -154,4 +154,5 @@ async def discord_monitor(token: str, user_id: str, interval: int = 60):
     # Actually execute the monitor loop
     async for changes in change_detector(token, user_id, interval):
         # Handle the detected changes here (e.g. send webhook, alert, save to DB, etc.)
+        
         pass
