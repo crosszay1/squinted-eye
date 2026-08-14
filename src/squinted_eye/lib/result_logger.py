@@ -1,6 +1,6 @@
 import logging
 
-from logger import logger
+from .logger import logger
 
 
 class result_logger:
