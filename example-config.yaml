@@ -1,4 +1,4 @@
-# This is an example configuration file.
+# This is an example configuration file. You'll need to create a config file named config.yaml in the root directory for the app to work. 
 
 enabled_monitors:
   - discord_monitor
@@ -6,3 +6,5 @@ enabled_monitors:
 settings:
   discord_monitor:
     token: "TOKEN"
+    read_interval: 60
+    user_id: "USER_ID"

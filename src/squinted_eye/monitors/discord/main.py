@@ -1,7 +1,7 @@
 import asyncio
 from typing import Any, AsyncGenerator
 import httpx
-from lib.logger import logger
+from squinted_eye.lib.logger import logger
 from squinted_eye.lib.result_logger import result_logger
 
 logger = logger(name="discord_monitor")
