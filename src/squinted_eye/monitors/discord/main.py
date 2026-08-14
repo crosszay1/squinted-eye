@@ -65,6 +65,7 @@ async def fetch_target_info(client: httpx.AsyncClient, token: str, target_user_i
             
         # Ensure we don't crash if Discord returns HTML (like on a 502/504 error)
         if "application/json" in response.headers.get("content-type", ""):
+            logger.debug(f"Response.json: {response.json()}")
             return response.json()
         else:
             logger.error("Received non-JSON response from Discord API.")
